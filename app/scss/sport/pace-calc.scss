@@ -1,0 +1,9 @@
+.run-calc__wrapper {
+	display: grid;
+	grid-template-columns: 46% 46%;
+	grid-column-gap: 4%;
+
+	.run-calc__input-section {
+		border: 1px solid gray;
+	}
+}

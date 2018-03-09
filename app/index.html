@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+	<link rel="stylesheet" type="text/css" href="css/sport/pace-calc.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<header>
+	<h3>Hello</h3>
+</header>
+
+<main role="main">
+
+	<div class="run-calc">
+		<div id="run-calc" class="run-calc__wrapper">
+			<div class="run-calc__input-section">
+				<div class="run-calc__input-field">
+				  	<input type="number" id="distance-km" v-model.number="distanceKilometers">
+					<label for="distance-km">Kilometer</label>
+				</div>
+				<div class="run-calc__input-field">		
+					<input type="number" id="distance-m" v-model.number="distanceMeters">
+					<label for="distance-m">Meter</label>
+				</div>
+				<div class="run-calc__input-field">		
+					<input type="number" id="time-h" v-model.number="timeHours">
+					<label for="time-h">Timmar</label>
+				</div>
+				<div class="run-calc__input-field">		
+			  		<input type="number" id="time-m" v-model.number="timeMinutes">
+			  		<label for="time-h">Minuter</label>
+				</div>
+			</div>
+			<div class="run-calc__input-section">
+				<div class="run-calc__input-field">		
+			  		<input disabled type="number" id="pace-m" v-model.number="paceMinutes">
+			  		<label for="pace-m">Minuter / km</label>
+				</div>
+				<div class="run-calc__input-field">		
+			  		<input disabled type="number" id="pace-s" v-model.number="paceSeconds">
+			  		<label for="pace-s">Sekunder / km</label>
+				</div>
+				<div class="run-calc__input-field">
+			  		<input disabled type="number" id="speed" v-model.number="speed">
+			  		<label for="speed">Kilometer per timme</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</main>
+
+<footer>
+	<h4>Hej</h4>
+</footer>
+
+<script type="text/javascript">
+	var runningCalc = new Vue({
+		el: '#run-calc',
+		data: {
+			distanceKilometers: 10,
+			distanceMeters: 0,
+			timeHours: 1,
+			timeMinutes: 0,
+			paceMinutes: 6,
+			paceSeconds: 0,
+			speed: 10
+		},
+		watch: {
+			distanceKilometers: function() {
+				this.calculatePace();
+				this.calculateSpeed();
+			},
+			distanceMeters: function() {
+				this.calculatePace();
+				this.calculateSpeed();
+			},
+			timeHours: function() {
+				this.calculatePace();
+				this.calculateSpeed();
+			},
+			timeMinutes: function() {
+				this.calculatePace();
+				this.calculateSpeed();
+			},
+			pace: function() {
+				//this.calcDistance();
+				//this.calcTime();
+				//this.calcSpeed();
+			},
+			speed: function() {
+				//this.calcDistance();
+				//this.calcTime();
+				//this.calcPace();
+			}
+		},
+		methods: {
+			calculateDistance: function() {
+				let pace = this.paceMinutes + (this.paceSeconds / 60)
+				this.distanceKilometers = (this.timeHours * 60) / pace;
+			},
+			calculateTime: function() {
+				//this.time = this.distance * 20
+			},
+			calculatePace: function() {
+				let hours = this.timeHours == "" ? 0 : this.timeHours;
+				let minutes = this.timeMinutes == "" ? 0 : this.timeMinutes;
+				if (hours == 0 && minutes == 0 || this.distanceKilometers == 0 && this.distanceMeters == 0) {
+					this.paceMinutes = 0;
+					this.paceSeconds = 0;
+				}
+				else {
+					let time = (this.timeHours * 60) + this.timeMinutes;
+					time = time / (this.distanceKilometers + (this.distanceMeters / 1000));
+					minutes = String(time).split('.')[0];
+					this.paceMinutes = minutes;
+
+					let timeString = String(time);
+					console.log(timeString);
+
+					if (timeString.indexOf('.') != -1) {
+						let seconds = timeString.substr(timeString.indexOf('.'), timeString.length);
+						seconds	= (seconds * 0.6) * 100;
+						seconds	= Math.round(seconds * 10) / 10;
+						console.log("Seconds " + seconds);
+						this.paceSeconds = seconds;
+					}
+					else {
+						this.paceSeconds = 0;
+					}
+					
+
+					
+					
+				}
+			},
+			calculateSpeed: function() {
+				let hours = this.timeHours == "" ? 0 : this.timeHours;
+				let minutes = this.timeMinutes == "" ? 0 : this.timeMinutes;
+				if (hours == 0 && minutes == 0) {
+					this.speed = 0;
+				}
+				else {
+					let time = (this.timeMinutes / 60) + this.timeHours;
+					let speed = (this.distanceKilometers + (this.distanceMeters / 1000)) / time;
+					speed = Math.round(speed * 10) / 10;
+					this.speed = speed;
+				}
+				
+			}
+		}
+	})
+</script>
+
+</body>
+</html>
