@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<title>Test</title>
-	<link rel="stylesheet" type="text/css" href="css/sport/pace-calc.css">
+	<link href="https://fonts.googleapis.com/css?family=Mina:400,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 
@@ -12,38 +14,46 @@
 
 <main role="main">
 
-	<div class="run-calc">
+	<div class="container run-calc">
 		<div id="run-calc" class="run-calc__wrapper">
 			<div class="run-calc__input-section">
-				<div class="run-calc__input-field">
-				  	<input type="number" id="distance-km" v-model.number="distanceKilometers">
-					<label for="distance-km">Kilometer</label>
+				<div class="run-calc__input-section--distance">
+					<div class="run-calc__input-field">
+						<input type="number" id="distance-km" v-model.number="distanceKilometers">
+						<label for="distance-km">Kilometers</label>
+					</div>
+					<div class="run-calc__input-field">		
+						<input type="number" id="distance-m" v-model.number="distanceMeters">
+						<label for="distance-m">Meters</label>
+					</div>
 				</div>
-				<div class="run-calc__input-field">		
-					<input type="number" id="distance-m" v-model.number="distanceMeters">
-					<label for="distance-m">Meter</label>
-				</div>
-				<div class="run-calc__input-field">		
-					<input type="number" id="time-h" v-model.number="timeHours">
-					<label for="time-h">Timmar</label>
-				</div>
-				<div class="run-calc__input-field">		
-			  		<input type="number" id="time-m" v-model.number="timeMinutes">
-			  		<label for="time-h">Minuter</label>
+				<div class="run-calc__input-section--time">
+					<div class="run-calc__input-field">		
+						<input type="number" id="time-h" v-model.number="timeHours">
+						<label for="time-h">Hours</label>
+					</div>
+					<div class="run-calc__input-field">		
+						<input type="number" id="time-m" v-model.number="timeMinutes">
+						<label for="time-h">Minutes</label>
+					</div>
+					<div class="run-calc__input-field">		
+						<input type="number" id="time-s" v-model.number="timeSeconds">
+						<label for="time-s">Seconds</label>
+					</div>
 				</div>
 			</div>
 			<div class="run-calc__input-section">
 				<div class="run-calc__input-field">		
 			  		<input disabled type="number" id="pace-m" v-model.number="paceMinutes">
-			  		<label for="pace-m">Minuter / km</label>
+			  		<label for="pace-m">Minutes / km</label>
 				</div>
 				<div class="run-calc__input-field">		
 			  		<input disabled type="number" id="pace-s" v-model.number="paceSeconds">
-			  		<label for="pace-s">Sekunder / km</label>
+			  		<label for="pace-s">Seconds / km</label>
 				</div>
 				<div class="run-calc__input-field">
 			  		<input disabled type="number" id="speed" v-model.number="speed">
-			  		<label for="speed">Kilometer per timme</label>
+			  		<label for="speed">Kilometer per hour</label>
 				</div>
 			</div>
 		</div>
@@ -63,9 +73,10 @@
 			distanceMeters: 0,
 			timeHours: 1,
 			timeMinutes: 0,
+			timeSeconds: 0,
 			paceMinutes: 6,
 			paceSeconds: 0,
-			speed: 10
+			speed: 10,
 		},
 		watch: {
 			distanceKilometers: function() {

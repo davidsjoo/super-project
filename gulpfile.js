@@ -1,15 +1,22 @@
+var postcss = require('gulp-postcss');
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var browserSync = require('browser-sync').create();
 var concat = require('gulp-concat');
+var autoprefixer = require('autoprefixer');
 
 gulp.task('default', function() {
 	console.log('Test');
 });
 
 gulp.task('sass', function(){
-  return gulp.src('app/scss/**/*.scss')
+  var plugins = [
+    autoprefixer({browsers: ['last 2 version']}),
+  ];
+  return gulp.src('app/scss/sources.scss')
     .pipe(sass())
+    .pipe(postcss(plugins))
+    .pipe(concat('main.css'))
     .pipe(gulp.dest('app/css'))
     .pipe(browserSync.reload({
       stream: true

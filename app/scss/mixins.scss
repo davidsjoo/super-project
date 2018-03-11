@@ -1,0 +1,14 @@
+// Max 767px
+@mixin media-mobile {
+    @media (max-width: #{$screen__s - 1}) {
+      @content;
+    }
+}
+
+// Min 768px
+@mixin media-tablet-up {
+    @media (min-width: #{$screen__s}) {
+      @content;
+    }
+}
+  

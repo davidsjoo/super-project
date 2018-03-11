@@ -1,9 +1,40 @@
-.run-calc__wrapper {
-	display: grid;
-	grid-template-columns: 46% 46%;
-	grid-column-gap: 4%;
+.run-calc {
+	max-width: $screen__m;
+}
 
+.run-calc__wrapper {
 	.run-calc__input-section {
-		border: 1px solid red;
+		.run-calc__input-field:not(:last-child) {
+			margin-bottom: 5px;
+		}
+
+		.run-calc__input-field input {
+			padding: 5px;
+			border: 0;
+			border-bottom: 2px solid $blue-dark;
+		}
+
+		border-radius: $border-radius;
+		box-shadow: 4px 4px 19px -5px rgba(51,51,51,1);
+	}
+}
+
+@include media-mobile {
+
+}
+
+@include media-tablet-up {
+	.run-calc {
+		max-width: $screen__m;
+	}
+	
+	.run-calc__wrapper {
+		display: grid;
+		grid-template-columns: 49% 49%;
+		grid-column-gap: 2%;
+	
+		.run-calc__input-section {
+			padding: $indent__s;
+		}
 	}
 }
