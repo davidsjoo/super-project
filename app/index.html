@@ -16,8 +16,8 @@
 
 	<div class="container run-calc">
 		<div id="run-calc" class="run-calc__wrapper">
-			<div class="run-calc__input-section">
-				<div class="run-calc__input-section--distance">
+			<div class="run-calc__input-box">
+				<div class="run-calc__input-section">
 					<div class="run-calc__input-field">
 						<input type="number" id="distance-km" v-model.number="distanceKilometers">
 						<label for="distance-km">Kilometers</label>
@@ -27,7 +27,7 @@
 						<label for="distance-m">Meters</label>
 					</div>
 				</div>
-				<div class="run-calc__input-section--time">
+				<div class="run-calc__input-section">
 					<div class="run-calc__input-field">		
 						<input type="number" id="time-h" v-model.number="timeHours">
 						<label for="time-h">Hours</label>
@@ -42,18 +42,20 @@
 					</div>
 				</div>
 			</div>
-			<div class="run-calc__input-section">
-				<div class="run-calc__input-field">		
-			  		<input disabled type="number" id="pace-m" v-model.number="paceMinutes">
-			  		<label for="pace-m">Minutes / km</label>
-				</div>
-				<div class="run-calc__input-field">		
-			  		<input disabled type="number" id="pace-s" v-model.number="paceSeconds">
-			  		<label for="pace-s">Seconds / km</label>
+			<div class="run-calc__input-box--inactive">
+				<div class="run-calc__input-section">
+					<div class="run-calc__input-field">		
+						<input disabled type="number" id="pace-m" v-model.number="paceMinutes">
+						<label for="pace-m">Minutes / km</label>
+					</div>
+					<div class="run-calc__input-field">		
+						<input disabled type="number" id="pace-s" v-model.number="paceSeconds">
+						<label for="pace-s">Seconds / km</label>
+					</div>
 				</div>
 				<div class="run-calc__input-field">
 			  		<input disabled type="number" id="speed" v-model.number="speed">
-			  		<label for="speed">Kilometer per hour</label>
+			  		<label for="speed">Kilometer / hour</label>
 				</div>
 			</div>
 		</div>

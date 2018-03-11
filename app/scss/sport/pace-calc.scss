@@ -1,22 +1,51 @@
-.run-calc {
-	max-width: $screen__m;
-}
+$inactive__font-size: 30px;
 
 .run-calc__wrapper {
-	.run-calc__input-section {
+	.run-calc__input-box {
+		
+		.run-calc__input-section {
+			display: flex;
+		}
+
+		.run-calc__input-field {
+			width: 33.33333%;
+			padding: 0 15px;
+			box-sizing: border-box;
+			label {
+				display: block;
+				font-size: $font-size__s;
+			}
+		}
+		
+		.run-calc__input-field input {
+			width: 100%;
+			border: 0;
+			border-bottom: 1px solid $blue-dark;
+			font-size: $font-size__l;
+		}
+		
 		.run-calc__input-field:not(:last-child) {
 			margin-bottom: 5px;
 		}
+	}
 
-		.run-calc__input-field input {
-			padding: 5px;
-			border: 0;
-			border-bottom: 2px solid $blue-dark;
+	.run-calc__input-box--inactive {
+		.run-calc__input-section {
+			display: flex;
 		}
+		input {
+			width: 100%;
+			background: transparent;
+			border: 0;
+			font-size: $inactive__font-size;
+		}
+	}
 
+	.run-calc__input-box, .run-calc__input-box--inactive {
 		border-radius: $border-radius;
 		box-shadow: 4px 4px 19px -5px rgba(51,51,51,1);
 	}
+
 }
 
 @include media-mobile {
@@ -25,7 +54,7 @@
 
 @include media-tablet-up {
 	.run-calc {
-		max-width: $screen__m;
+		max-width: $screen__s;
 	}
 	
 	.run-calc__wrapper {
@@ -33,8 +62,8 @@
 		grid-template-columns: 49% 49%;
 		grid-column-gap: 2%;
 	
-		.run-calc__input-section {
-			padding: $indent__s;
+		.run-calc__input-box, .run-calc__input-box--inactive {
+			padding: $indent__m;
 		}
 	}
 }
