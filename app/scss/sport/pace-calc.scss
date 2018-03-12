@@ -1,4 +1,4 @@
-$inactive__font-size: 30px;
+$inactive__font-size: 35px;
 
 .run-calc__wrapper {
 	.run-calc__input-box {
@@ -31,12 +31,16 @@ $inactive__font-size: 30px;
 
 	.run-calc__input-box--inactive {
 		.run-calc__input-section {
-			display: flex;
+			display: none;
 		}
 		input {
 			width: 100%;
 			background: transparent;
 			border: 0;
+			font-size: $inactive__font-size;
+		}
+
+		.run-calc__data-section--time {
 			font-size: $inactive__font-size;
 		}
 	}

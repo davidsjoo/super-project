@@ -32,15 +32,16 @@ body {
   margin-bottom: 5px; }
 
 .run-calc__wrapper .run-calc__input-box--inactive .run-calc__input-section {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex; }
+  display: none; }
 
 .run-calc__wrapper .run-calc__input-box--inactive input {
   width: 100%;
   background: transparent;
   border: 0;
-  font-size: 30px; }
+  font-size: 35px; }
+
+.run-calc__wrapper .run-calc__input-box--inactive .run-calc__data-section--time {
+  font-size: 35px; }
 
 .run-calc__wrapper .run-calc__input-box, .run-calc__wrapper .run-calc__input-box--inactive {
   border-radius: 4px;

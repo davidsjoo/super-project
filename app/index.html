@@ -53,9 +53,24 @@
 						<label for="pace-s">Seconds / km</label>
 					</div>
 				</div>
-				<div class="run-calc__input-field">
-			  		<input disabled type="number" id="speed" v-model.number="speed">
-			  		<label for="speed">Kilometer / hour</label>
+				<div class="run-calc__input-section">
+					<div class="run-calc__input-field">
+						<input disabled type="number" id="speed" v-model.number="speed">
+						<label for="speed">Kilometer / hour</label>
+					</div>
+				</div>
+				<div class="run-calc__data-section">
+					<div class="run-calc__data-section--pace">
+						<span class="run-calc__data-section--time">{{ paceMinutes }}</span>
+						<span class="run-calc__data-section--type">minutes</span>
+						<span class="run-calc__data-section--time">{{ paceSeconds }}</span>
+						<span class="run-calc__data-section--type">seconds</span>
+						<span class="run-calc__data-section--type"> / km</span>
+					</div>
+					<div class="run-calc__data-section--pace">
+						<span class="run-calc__data-section--time">{{ speed }}</span>
+						<span class="run-calc__data-section--type">kilometers per hour</span>
+					</div>
 				</div>
 			</div>
 		</div>
