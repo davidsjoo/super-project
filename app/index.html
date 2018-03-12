@@ -17,6 +17,7 @@
 	<div class="container run-calc">
 		<div id="run-calc" class="run-calc__wrapper">
 			<div class="run-calc__input-box">
+				<h4 class="run-calc__input--headline">Distance</h4>
 				<div class="run-calc__input-section">
 					<div class="run-calc__input-field">
 						<input type="number" id="distance-km" v-model.number="distanceKilometers">
@@ -27,6 +28,7 @@
 						<label for="distance-m">Meters</label>
 					</div>
 				</div>
+				<h4 class="run-calc__input--headline">Time</h4>
 				<div class="run-calc__input-section">
 					<div class="run-calc__input-field">		
 						<input type="number" id="time-h" v-model.number="timeHours">
@@ -60,6 +62,7 @@
 					</div>
 				</div>
 				<div class="run-calc__data-section">
+					<h4 class="run-calc__input--headline">Pace</h4>
 					<div class="run-calc__data-section--pace">
 						<span class="run-calc__data-section--time">{{ paceMinutes }}</span>
 						<span class="run-calc__data-section--type">minutes</span>
@@ -67,9 +70,10 @@
 						<span class="run-calc__data-section--type">seconds</span>
 						<span class="run-calc__data-section--type"> / km</span>
 					</div>
+					<h4 class="run-calc__input--headline">Speed</h4>
 					<div class="run-calc__data-section--pace">
 						<span class="run-calc__data-section--time">{{ speed }}</span>
-						<span class="run-calc__data-section--type">kilometers per hour</span>
+						<span class="run-calc__data-section--type">km / h</span>
 					</div>
 				</div>
 			</div>

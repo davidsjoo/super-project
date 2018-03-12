@@ -1,12 +1,15 @@
-* {
-    font-family: 'Mina', sans-serif;
-}
-
 body {
     margin: 0;
+    color: $dark__primary;
+    font-family: 'Mina', sans-serif;
 }
 
 .container {
     margin: 0 auto;
     padding: $indent__s;
+}
+
+input {
+    color: $dark__primary;
+    font-family: 'Mina', sans-serif;
 }

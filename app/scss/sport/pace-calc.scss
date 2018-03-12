@@ -1,10 +1,19 @@
-$inactive__font-size: 35px;
+$inactive__font-size: 42px;
+$active__font-size: 24px;
+$info-text__color: $blue-dark;
 
 .run-calc__wrapper {
+
+	.run-calc__input--headline {
+		margin-top: 0;
+		margin-bottom: 5px;
+	}
+
 	.run-calc__input-box {
 		
 		.run-calc__input-section {
 			display: flex;
+			justify-content: center;
 		}
 
 		.run-calc__input-field {
@@ -13,6 +22,7 @@ $inactive__font-size: 35px;
 			box-sizing: border-box;
 			label {
 				display: block;
+				color: $info-text__color;
 				font-size: $font-size__s;
 			}
 		}
@@ -21,7 +31,10 @@ $inactive__font-size: 35px;
 			width: 100%;
 			border: 0;
 			border-bottom: 1px solid $blue-dark;
-			font-size: $font-size__l;
+			font-size: $active__font-size;
+			&:focus {
+				outline: none;
+			}
 		}
 		
 		.run-calc__input-field:not(:last-child) {
@@ -30,6 +43,7 @@ $inactive__font-size: 35px;
 	}
 
 	.run-calc__input-box--inactive {
+
 		.run-calc__input-section {
 			display: none;
 		}
@@ -40,8 +54,17 @@ $inactive__font-size: 35px;
 			font-size: $inactive__font-size;
 		}
 
+		.run-calc__data-section--pace {
+			padding: 0 $indent__s;
+		}
+
 		.run-calc__data-section--time {
 			font-size: $inactive__font-size;
+		}
+
+		.run-calc__data-section--type {
+			color: $info-text__color;
+			font-size: $font-size__s;
 		}
 	}
 
