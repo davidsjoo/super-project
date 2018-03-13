@@ -4,6 +4,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<title>Test</title>
 	<link href="https://fonts.googleapis.com/css?family=Mina:400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
@@ -17,7 +19,10 @@
 	<div class="container run-calc">
 		<div id="run-calc" class="run-calc__wrapper">
 			<div class="run-calc__input-box">
-				<h4 class="run-calc__input--headline">Distance</h4>
+				<div class="run-calc__input--headline">
+						<i class="material-icons">gps_fixed</i>
+					<h4>Distance</h4>
+				</div>
 				<div class="run-calc__input-section">
 					<div class="run-calc__input-field">
 						<input type="number" id="distance-km" v-model.number="distanceKilometers">
@@ -28,7 +33,9 @@
 						<label for="distance-m">Meters</label>
 					</div>
 				</div>
-				<h4 class="run-calc__input--headline">Time</h4>
+				<div class="run-calc__input--headline">
+						<i class="material-icons">timer</i><h4>Time</h4>
+				</div>
 				<div class="run-calc__input-section">
 					<div class="run-calc__input-field">		
 						<input type="number" id="time-h" v-model.number="timeHours">
@@ -62,7 +69,10 @@
 					</div>
 				</div>
 				<div class="run-calc__data-section">
-					<h4 class="run-calc__input--headline">Pace</h4>
+					<div class="run-calc__input--headline">
+						<i class="material-icons">watch</i>
+						<h4>Pace</h4>
+					</div>
 					<div class="run-calc__data-section--pace">
 						<span class="run-calc__data-section--time">{{ paceMinutes }}</span>
 						<span class="run-calc__data-section--type">minutes</span>
@@ -70,7 +80,10 @@
 						<span class="run-calc__data-section--type">seconds</span>
 						<span class="run-calc__data-section--type"> / km</span>
 					</div>
-					<h4 class="run-calc__input--headline">Speed</h4>
+					<div class="run-calc__input--headline">
+							<i class="material-icons">flash_on</i>
+						<h4>Speed</h4>
+					</div>
 					<div class="run-calc__data-section--pace">
 						<span class="run-calc__data-section--time">{{ speed }}</span>
 						<span class="run-calc__data-section--type">km / h</span>

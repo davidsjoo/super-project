@@ -12,8 +12,14 @@ input {
   font-family: 'Mina', sans-serif; }
 
 .run-calc__wrapper .run-calc__input--headline {
-  margin-top: 0;
   margin-bottom: 5px; }
+  .run-calc__wrapper .run-calc__input--headline h4 {
+    display: inline-block;
+    margin: 0;
+    margin-left: 5px; }
+  .run-calc__wrapper .run-calc__input--headline i {
+    color: #00ACC1;
+    vertical-align: middle; }
 
 .run-calc__wrapper .run-calc__input-box .run-calc__input-section {
   display: -webkit-box;
@@ -54,7 +60,8 @@ input {
   font-size: 42px; }
 
 .run-calc__wrapper .run-calc__input-box--inactive .run-calc__data-section--pace {
-  padding: 0 15px; }
+  padding: 0 15px;
+  text-align: center; }
 
 .run-calc__wrapper .run-calc__input-box--inactive .run-calc__data-section--time {
   font-size: 42px; }
