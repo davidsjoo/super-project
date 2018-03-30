@@ -1,6 +1,6 @@
 $inactive__font-size: 42px;
 $active__font-size: 24px;
-$info-text__color: $blue-dark;
+$info-text__color: $white__primary;
 $icon__color: #00ACC1;
 
 .run-calc__wrapper {
@@ -27,7 +27,7 @@ $icon__color: #00ACC1;
 			right: 15px;
 			width: 50px;
 			vertical-align: middle;
-			opacity: .3;
+			opacity: 1;
 		}
 		
 	}
@@ -69,6 +69,12 @@ $icon__color: #00ACC1;
 	.run-calc__input-box--inactive {
 
 		background: linear-gradient(135deg, #5a6587 0%,#404b6d 50%,#3b466a 100%);
+
+		.run-calc__input--headline {
+			img {
+				opacity: .3;
+			}
+		}
 
 		.run-calc__input-section {
 			display: none;
