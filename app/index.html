@@ -20,33 +20,35 @@
 		<div id="run-calc" class="run-calc__wrapper">
 			<div class="run-calc__input-box">
 				<div class="run-calc__input--headline">
-						<i class="material-icons">gps_fixed</i>
+					<img src="images/distance.svg"/>
 					<h4>Distance</h4>
 				</div>
 				<div class="run-calc__input-section">
 					<div class="run-calc__input-field">
-						<input type="number" id="distance-km" v-model.number="distanceKilometers">
+						<input type="text" id="distance-km" v-model.number="distanceKilometers">
 						<label for="distance-km">Kilometers</label>
 					</div>
 					<div class="run-calc__input-field">		
-						<input type="number" id="distance-m" v-model.number="distanceMeters">
+						<input type="text" id="distance-m" v-model.number="distanceMeters">
 						<label for="distance-m">Meters</label>
 					</div>
 				</div>
+			</div>
+			<div class="run-calc__input-box">
 				<div class="run-calc__input--headline">
-						<i class="material-icons">timer</i><h4>Time</h4>
+					<img src="images/timer.svg"/><h4>Time</h4>
 				</div>
 				<div class="run-calc__input-section">
 					<div class="run-calc__input-field">		
-						<input type="number" id="time-h" v-model.number="timeHours">
+						<input type="text" id="time-h" v-model.number="timeHours">
 						<label for="time-h">Hours</label>
 					</div>
 					<div class="run-calc__input-field">		
-						<input type="number" id="time-m" v-model.number="timeMinutes">
+						<input type="text" id="time-m" v-model.number="timeMinutes">
 						<label for="time-h">Minutes</label>
 					</div>
 					<div class="run-calc__input-field">		
-						<input type="number" id="time-s" v-model.number="timeSeconds">
+						<input type="text" id="time-s" v-model.number="timeSeconds">
 						<label for="time-s">Seconds</label>
 					</div>
 				</div>
@@ -54,23 +56,18 @@
 			<div class="run-calc__input-box--inactive">
 				<div class="run-calc__input-section">
 					<div class="run-calc__input-field">		
-						<input disabled type="number" id="pace-m" v-model.number="paceMinutes">
+						<input disabled type="text" id="pace-m" v-model.number="paceMinutes">
 						<label for="pace-m">Minutes / km</label>
 					</div>
 					<div class="run-calc__input-field">		
-						<input disabled type="number" id="pace-s" v-model.number="paceSeconds">
+						<input disabled type="text" id="pace-s" v-model.number="paceSeconds">
 						<label for="pace-s">Seconds / km</label>
 					</div>
 				</div>
-				<div class="run-calc__input-section">
-					<div class="run-calc__input-field">
-						<input disabled type="number" id="speed" v-model.number="speed">
-						<label for="speed">Kilometer / hour</label>
-					</div>
-				</div>
+				
 				<div class="run-calc__data-section">
 					<div class="run-calc__input--headline">
-						<i class="material-icons">watch</i>
+						<img src="images/stopwatch.svg"/>
 						<h4>Pace</h4>
 					</div>
 					<div class="run-calc__data-section--pace">
@@ -80,14 +77,23 @@
 						<span class="run-calc__data-section--type">seconds</span>
 						<span class="run-calc__data-section--type"> / km</span>
 					</div>
-					<div class="run-calc__input--headline">
-							<i class="material-icons">flash_on</i>
-						<h4>Speed</h4>
+					
+				</div>
+			</div>
+			<div class="run-calc__input-box--inactive">
+				<div class="run-calc__input--headline">
+					<img src="images/speedometer.svg"/>
+					<h4>Speed</h4>
+				</div>
+				<div class="run-calc__data-section--speed">
+					<div class="run-calc__input-section">
+						<div class="run-calc__input-field">
+							<input disabled type="text" id="speed" v-model.number="speed">
+							<label for="speed">Kilometer / hour</label>
+						</div>
 					</div>
-					<div class="run-calc__data-section--pace">
-						<span class="run-calc__data-section--time">{{ speed }}</span>
-						<span class="run-calc__data-section--type">km / h</span>
-					</div>
+					<span class="run-calc__data-section--time">{{ speed }}</span>
+					<span class="run-calc__data-section--type">km / h</span>
 				</div>
 			</div>
 		</div>
@@ -97,6 +103,7 @@
 
 <footer>
 	<h4>Hej</h4>
+	<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script type="text/javascript">
@@ -129,6 +136,10 @@
 				this.calculatePace();
 				this.calculateSpeed();
 			},
+			timeSeconds: function() {
+				this.calculatePace();
+				this.calculateSpeed();
+			},
 			pace: function() {
 				//this.calcDistance();
 				//this.calcTime();
@@ -151,12 +162,13 @@
 			calculatePace: function() {
 				let hours = this.timeHours == "" ? 0 : this.timeHours;
 				let minutes = this.timeMinutes == "" ? 0 : this.timeMinutes;
-				if (hours == 0 && minutes == 0 || this.distanceKilometers == 0 && this.distanceMeters == 0) {
+				let seconds = this.timeSeconds == "" ? 0 : this.timeSeconds;
+				if (hours == 0 && minutes == 0 && seconds == 0 || this.distanceKilometers == 0 && this.distanceMeters == 0) {
 					this.paceMinutes = 0;
 					this.paceSeconds = 0;
 				}
 				else {
-					let time = (this.timeHours * 60) + this.timeMinutes;
+					let time = (this.timeHours * 60) + this.timeMinutes + (this.timeSeconds / 60);
 					time = time / (this.distanceKilometers + (this.distanceMeters / 1000));
 					minutes = String(time).split('.')[0];
 					this.paceMinutes = minutes;
@@ -183,11 +195,12 @@
 			calculateSpeed: function() {
 				let hours = this.timeHours == "" ? 0 : this.timeHours;
 				let minutes = this.timeMinutes == "" ? 0 : this.timeMinutes;
-				if (hours == 0 && minutes == 0) {
+				let seconds = this.timeSeconds == "" ? 0 : this.timeSeconds;
+				if (hours == 0 && minutes == 0 && seconds == 0) {
 					this.speed = 0;
 				}
 				else {
-					let time = (this.timeMinutes / 60) + this.timeHours;
+					let time = ((this.timeSeconds / 60) / 60) + (this.timeMinutes / 60) + this.timeHours;
 					let speed = (this.distanceKilometers + (this.distanceMeters / 1000)) / time;
 					speed = Math.round(speed * 10) / 10;
 					this.speed = speed;
