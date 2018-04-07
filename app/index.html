@@ -17,84 +17,109 @@
 <main role="main">
 
 	<div class="container run-calc">
-		<div id="run-calc" class="run-calc__wrapper">
-			<div class="run-calc__input-box">
-				<div class="run-calc__input--headline">
-					<img src="images/distance.svg"/>
-					<h4>Distance</h4>
-				</div>
-				<div class="run-calc__input-section">
-					<div class="run-calc__input-field">
-						<input type="text" id="distance-km" v-model.number="distanceKilometers">
-						<label for="distance-km">Kilometers</label>
-					</div>
-					<div class="run-calc__input-field">		
-						<input type="text" id="distance-m" v-model.number="distanceMeters">
-						<label for="distance-m">Meters</label>
-					</div>
-				</div>
-			</div>
-			<div class="run-calc__input-box">
-				<div class="run-calc__input--headline">
-					<img src="images/timer.svg"/><h4>Time</h4>
-				</div>
-				<div class="run-calc__input-section">
-					<div class="run-calc__input-field">		
-						<input type="text" id="time-h" v-model.number="timeHours">
-						<label for="time-h">Hours</label>
-					</div>
-					<div class="run-calc__input-field">		
-						<input type="text" id="time-m" v-model.number="timeMinutes">
-						<label for="time-h">Minutes</label>
-					</div>
-					<div class="run-calc__input-field">		
-						<input type="text" id="time-s" v-model.number="timeSeconds">
-						<label for="time-s">Seconds</label>
-					</div>
-				</div>
-			</div>
-			<div class="run-calc__input-box--inactive">
-				<div class="run-calc__input-section">
-					<div class="run-calc__input-field">		
-						<input disabled type="text" id="pace-m" v-model.number="paceMinutes">
-						<label for="pace-m">Minutes / km</label>
-					</div>
-					<div class="run-calc__input-field">		
-						<input disabled type="text" id="pace-s" v-model.number="paceSeconds">
-						<label for="pace-s">Seconds / km</label>
-					</div>
-				</div>
-				
-				<div class="run-calc__data-section">
-					<div class="run-calc__input--headline">
-						<img src="images/stopwatch.svg"/>
-						<h4>Pace</h4>
-					</div>
-					<div class="run-calc__data-section--pace">
-						<span class="run-calc__data-section--time">{{ paceMinutes }}</span>
-						<span class="run-calc__data-section--type">minutes</span>
-						<span class="run-calc__data-section--time">{{ paceSeconds }}</span>
-						<span class="run-calc__data-section--type">seconds</span>
-						<span class="run-calc__data-section--type"> / km</span>
-					</div>
-					
-				</div>
-			</div>
-			<div class="run-calc__input-box--inactive">
-				<div class="run-calc__input--headline">
-					<img src="images/speedometer.svg"/>
-					<h4>Speed</h4>
-				</div>
-				<div class="run-calc__data-section--speed">
-					<div class="run-calc__input-section">
-						<div class="run-calc__input-field">
-							<input disabled type="text" id="speed" v-model.number="speed">
-							<label for="speed">Kilometer / hour</label>
+		<div id="run-calc">
+
+			<ul class="select-calc">
+				<li>
+					<input type="radio" selected id="selected-pace-n-speed" value="selected-pace-n-speed" v-model="selected">
+					<label for="selected-pace-n-speed">Calculate pace & speed</label>
+				</li>
+				<li>
+					<input type="radio" id="selected-time" value="selected-time" v-model="selected">
+					<label for="selected-time">Calculate time</label>
+				</li>
+			</ul>
+			<div class="run-calc__wrapper">
+				<transition name="distance-fade" appear>
+					<div class="box run-calc__input-box">
+						<div class="run-calc__input--headline">
+							<img v-bind:class="{ active: selectedCalc == 'selected-pace-n-speed' || selectedCalc == 'selected-time' }" src="images/distance.svg"/>
+							<h4>Distance</h4>
+						</div>
+						<div class="run-calc__input-section">
+							<div class="run-calc__input-field">
+								<input type="number" id="distance-km" v-model.number="distanceKilometers">
+								<label for="distance-km">Kilometers</label>
+							</div>
+							<div class="run-calc__input-field">		
+								<input type="number" id="distance-m" v-model.number="distanceMeters">
+								<label for="distance-m">Meters</label>
+							</div>
 						</div>
 					</div>
-					<span class="run-calc__data-section--time">{{ speed }}</span>
-					<span class="run-calc__data-section--type">km / h</span>
-				</div>
+				</transition>
+				<transition name="time-fade" appear>
+					<div class="box run-calc__input-box">
+						<div class="run-calc__input--headline">
+							<img v-bind:class="{ active: selectedCalc == 'selected-pace-n-speed' }" src="images/timer.svg"/><h4>Time</h4>
+						</div>
+						<div class="run-calc__input-section">
+							<div class="run-calc__input-field">		
+								<input type="number" id="time-h" v-model.number="timeHours">
+								<label for="time-h">Hours</label>
+							</div>
+							<div class="run-calc__input-field">		
+								<input type="number" id="time-m" v-model.number="timeMinutes">
+								<label for="time-h">Minutes</label>
+							</div>
+							<div class="run-calc__input-field">		
+								<input type="number" id="time-s" v-model.number="timeSeconds">
+								<label for="time-s">Seconds</label>
+							</div>
+						</div>
+					</div>
+				</transition>
+				<transition name="pace-fade" appear>
+					<div class="box run-calc__input-box--inactive">
+						<div class="run-calc__input--headline">
+							<img v-bind:class="{ active: selectedCalc == 'selected-time' }" src="images/stopwatch.svg"/>
+							<h4>Pace</h4>
+						</div>
+						<transition name="component-fade" mode="out-in">
+							<div class="box run-calc__data-section" v-if="selectedCalc == 'selected-pace-n-speed'" key="data-section">
+								<div class="run-calc__data-section--pace">
+									<span class="run-calc__data-section--time">{{ paceMinutes }}</span>
+									<span class="run-calc__data-section--type">minutes</span>
+									<span class="run-calc__data-section--time">{{ paceSeconds }}</span>
+									<span class="run-calc__data-section--type">seconds</span>
+									<span class="run-calc__data-section--type"> / km</span>
+								</div>
+							</div>
+							<div class="run-calc__input-section" else key="input-section">
+								<div class="run-calc__input-field">		
+									<input type="number" id="pace-m" v-model.number="paceMinutes">
+									<label for="pace-m">Minutes / km</label>
+								</div>
+								<div class="run-calc__input-field">		
+									<input type="number" id="pace-s" v-model.number="paceSeconds">
+									<label for="pace-s">Seconds / km</label>
+								</div>
+							</div>
+							
+						</transition>
+					</div>
+				</transition>
+				<transition name="speed-fade" appear>
+					<div class="box run-calc__input-box--inactive">
+						
+						<div class="run-calc__input--headline">
+							<img v-bind:class="{ active: selectedCalc == 'selected-time' }" src="images/speedometer.svg"/>
+							<h4>Speed</h4>
+						</div>
+						<transition name="component-fade" mode="out-in">
+							<div class="run-calc__data-section--speed" v-if="selectedCalc == 'selected-pace-n-speed'" key="input-section">
+								<span class="run-calc__data-section--time">{{ speed }}</span>
+								<span class="run-calc__data-section--type">km / h</span>
+							</div>
+							<div class="run-calc__input-section" else key="data-section">
+								<div class="run-calc__input-field">
+									<input type="number" id="speed" v-model.number="speed">
+									<label for="speed">Km / hour</label>
+								</div>
+							</div>
+						</transition>
+					</div>
+				</transition>
 			</div>
 		</div>
 	</div>
@@ -118,6 +143,27 @@
 			paceMinutes: 6,
 			paceSeconds: 0,
 			speed: 10,
+			selected: 'selected-pace-n-speed'
+		},
+		computed: {
+			selectedCalc: function() {
+				console.log(this.selected);
+				return this.selected;
+			},
+		},
+		mounted: function () {
+			
+				let container = document.querySelector('.run-calc');
+				// let boxes = document.querySelectorAll('.box');
+
+				container.classList.add('js-loaded');
+
+				// boxes.forEach(function(element) {
+				// 	element.style.opacity = 1;
+				// })
+
+			
+			
 		},
 		watch: {
 			distanceKilometers: function() {

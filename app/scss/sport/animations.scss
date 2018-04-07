@@ -1,0 +1,30 @@
+.time-fade-enter, .speed-fade-enter {
+	transform: translateX(-300%);
+}
+.distance-fade-enter, .pace-fade-enter {
+    transform: translateX(-300%);
+}
+.distance-fade-enter-active, .pace-fade-enter-active, .speed-fade-enter-active, .time-fade-enter-active {
+    transition: transform .2s linear;
+}
+.pace-fade-enter-active {
+	transition-delay: .3s;
+}
+.distance-fade-enter-active {
+	transition-delay: .2s;
+}
+.speed-fade-enter-active {
+	transition-delay: .1s;
+}
+
+.distance-fade-fade-enter, .pace-fade-fade-enter, .time-fade-fade-enter, .speed-fade-fade-enter {
+	transform: translateX(0);
+}
+
+.component-fade-enter-active, .component-fade-leave-active {
+    transition: opacity .3s ease;
+  }
+  .component-fade-enter, .component-fade-leave-to
+  /* .component-fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
