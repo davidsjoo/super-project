@@ -1,5 +1,7 @@
 $inactive__font-size: 42px;
 $active__font-size: 24px;
+$inactive__font-size--mobile: 36px;
+$active__font-size--mobile: 18px;
 $info-text__color: $white__primary;
 $icon__color: #00ACC1;
 
@@ -11,6 +13,10 @@ $icon__color: #00ACC1;
 	&.js-loaded {
 		opacity: 1;
 	}
+}
+
+.select-calc, .main-nav, footer {
+	display: none;
 }
 
 .run-calc__wrapper {
@@ -34,8 +40,6 @@ $icon__color: #00ACC1;
 
 		img {
 			position: absolute;
-			right: 15px;
-			width: 50px;
 			vertical-align: middle;
 			opacity: .1;
 			&.active {
@@ -45,9 +49,7 @@ $icon__color: #00ACC1;
 		
 	}
 
-	.box {
-		
-		
+	.box {	
 		.run-calc__input-section {
 			display: flex;
 			justify-content: center;
@@ -60,7 +62,6 @@ $icon__color: #00ACC1;
 			label {
 				display: block;
 				color: $info-text__color;
-				font-size: $font-size__s;
 			}
 		}
 		
@@ -117,6 +118,52 @@ $icon__color: #00ACC1;
 }
 
 @include media-mobile {
+	.run-calc__wrapper {
+
+		display: grid;
+		//grid-template-columns: 1fr 1fr;
+		grid-column-gap: 2%;
+		grid-row-gap: $indent__s;
+
+		.box {
+			
+			.run-calc__input-field {
+				label {
+					font-size: $font-size__xs;
+				}
+			}
+			.run-calc__input-field input {
+				font-size: $active__font-size--mobile;
+			}
+		}
+
+		.run-calc__input--headline {
+
+			img {
+				width: 30px;
+				right: 10px;
+				top: 10px;
+			}
+			
+		}
+	
+
+		.run-calc__input-box--inactive {
+
+			background: linear-gradient(135deg, #5a6587 0%,#404b6d 50%,#3b466a 100%);
+
+			.run-calc__input-section {
+				//display: none;
+			}
+			input {
+				font-size: $inactive__font-size--mobile;
+			}
+
+			.run-calc__data-section--time {
+				font-size: $inactive__font-size--mobile;
+			}
+		}
+	}
 
 }
 
@@ -127,12 +174,37 @@ $icon__color: #00ACC1;
 	
 	.run-calc__wrapper {
 		display: grid;
-		grid-template-columns: 49% 49%;
+		grid-template-columns: 1fr 1fr;
 		grid-column-gap: 2%;
 		grid-row-gap: $indent__s;
 	
 		.run-calc__input-box, .run-calc__input-box--inactive {
 			padding: $indent__s;
+		}
+
+		.run-calc__input--headline {
+			margin-bottom: 5px;
+	
+			h4 {
+				display: inline-block;
+				margin: 0;
+				margin-left: 8px;
+				vertical-align: bottom;
+			}
+	
+			img {
+				right: 15px;
+				width: 50px;
+			}
+			
+		}
+	}
+
+	.box {
+		.run-calc__input-field {
+			label {
+				font-size: $font-size__s;
+			}
 		}
 	}
 }

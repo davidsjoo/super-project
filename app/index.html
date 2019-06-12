@@ -9,13 +9,15 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-
-<header>
-	<h3>Hello</h3>
-</header>
+<div class="page-wrapper">
+<div class="main-nav">
+	<ul>
+		<li>Hej</li>
+		<li>Hej</li>
+	</ul>
+</div>
 
 <main role="main">
-
 	<div class="container run-calc">
 		<div id="run-calc">
 
@@ -38,11 +40,11 @@
 						</div>
 						<div class="run-calc__input-section">
 							<div class="run-calc__input-field">
-								<input type="number" id="distance-km" v-model.number="distanceKilometers">
+								<input @input="distanceTimeChange" type="number" id="distance-km" v-model.number="distanceKilometers">
 								<label for="distance-km">Kilometers</label>
 							</div>
 							<div class="run-calc__input-field">		
-								<input type="number" id="distance-m" v-model.number="distanceMeters">
+								<input @input="distanceTimeChange" type="number" id="distance-m" v-model.number="distanceMeters">
 								<label for="distance-m">Meters</label>
 							</div>
 						</div>
@@ -53,20 +55,22 @@
 						<div class="run-calc__input--headline">
 							<img v-bind:class="{ active: selectedCalc == 'selected-pace-n-speed' }" src="images/timer.svg"/><h4>Time</h4>
 						</div>
-						<div class="run-calc__input-section">
-							<div class="run-calc__input-field">		
-								<input type="number" id="time-h" v-model.number="timeHours">
-								<label for="time-h">Hours</label>
+						<transition name="component-fade" mode="out-in">
+							<div class="run-calc__input-section" key="input-section">
+								<div class="run-calc__input-field">		
+									<input @input="distanceTimeChange" type="number" id="time-h" v-model.number="timeHours">
+									<label for="time-h">Hours</label>
+								</div>
+								<div class="run-calc__input-field">		
+									<input @input="distanceTimeChange" type="number" id="time-m" v-model.number="timeMinutes">
+									<label for="time-h">Minutes</label>
+								</div>
+								<div class="run-calc__input-field">		
+									<input @input="distanceTimeChange" type="number" id="time-s" v-model.number="timeSeconds">
+									<label for="time-s">Seconds</label>
+								</div>
 							</div>
-							<div class="run-calc__input-field">		
-								<input type="number" id="time-m" v-model.number="timeMinutes">
-								<label for="time-h">Minutes</label>
-							</div>
-							<div class="run-calc__input-field">		
-								<input type="number" id="time-s" v-model.number="timeSeconds">
-								<label for="time-s">Seconds</label>
-							</div>
-						</div>
+						</transition>
 					</div>
 				</transition>
 				<transition name="pace-fade" appear>
@@ -87,11 +91,11 @@
 							</div>
 							<div class="run-calc__input-section" else key="input-section">
 								<div class="run-calc__input-field">		
-									<input type="number" id="pace-m" v-model.number="paceMinutes">
+									<input @input="paceChange" type="number" id="pace-m" v-model.number="paceMinutes">
 									<label for="pace-m">Minutes / km</label>
 								</div>
 								<div class="run-calc__input-field">		
-									<input type="number" id="pace-s" v-model.number="paceSeconds">
+									<input @input="paceChange" type="number" id="pace-s" v-model.number="paceSeconds">
 									<label for="pace-s">Seconds / km</label>
 								</div>
 							</div>
@@ -113,7 +117,7 @@
 							</div>
 							<div class="run-calc__input-section" else key="data-section">
 								<div class="run-calc__input-field">
-									<input type="number" id="speed" v-model.number="speed">
+									<input @input="paceChange" type="number" id="speed" v-model.number="speed">
 									<label for="speed">Km / hour</label>
 								</div>
 							</div>
@@ -143,67 +147,47 @@
 			paceMinutes: 6,
 			paceSeconds: 0,
 			speed: 10,
-			selected: 'selected-pace-n-speed'
+			selected: ''
 		},
 		computed: {
 			selectedCalc: function() {
-				console.log(this.selected);
 				return this.selected;
 			},
 		},
 		mounted: function () {
-			
-				let container = document.querySelector('.run-calc');
-				// let boxes = document.querySelectorAll('.box');
-
-				container.classList.add('js-loaded');
-
-				// boxes.forEach(function(element) {
-				// 	element.style.opacity = 1;
-				// })
-
-			
-			
-		},
-		watch: {
-			distanceKilometers: function() {
-				this.calculatePace();
-				this.calculateSpeed();
-			},
-			distanceMeters: function() {
-				this.calculatePace();
-				this.calculateSpeed();
-			},
-			timeHours: function() {
-				this.calculatePace();
-				this.calculateSpeed();
-			},
-			timeMinutes: function() {
-				this.calculatePace();
-				this.calculateSpeed();
-			},
-			timeSeconds: function() {
-				this.calculatePace();
-				this.calculateSpeed();
-			},
-			pace: function() {
-				//this.calcDistance();
-				//this.calcTime();
-				//this.calcSpeed();
-			},
-			speed: function() {
-				//this.calcDistance();
-				//this.calcTime();
-				//this.calcPace();
-			}
+			const container = document.querySelector('.run-calc');
+			container.classList.add('js-loaded');
 		},
 		methods: {
+			distanceTimeChange() {
+				this.calculatePace();
+				this.calculateSpeed();
+			},
+			paceChange() {
+				this.calculateSpeed();
+				this.calculateTime();
+			},
 			calculateDistance: function() {
 				let pace = this.paceMinutes + (this.paceSeconds / 60)
 				this.distanceKilometers = (this.timeHours * 60) / pace;
 			},
 			calculateTime: function() {
-				//this.time = this.distance * 20
+				let km = this.distanceKilometers == "" ? 0 : this.distanceKilometers;
+				let m = this.distanceMeters == "" ? 0 : this.distanceMeters;
+				let distance = km + (m / 1000);
+
+				let time = distance / this.speed;
+				console.log("Time "+time);
+				
+				let timeString = String(time);
+				if (timeString.indexOf('.') != -1) {
+					if (time < 1) {
+						this.timeHours = 0;	
+					}
+				}
+				else {
+					this.timeHours = time;
+				}
 			},
 			calculatePace: function() {
 				let hours = this.timeHours == "" ? 0 : this.timeHours;
@@ -220,22 +204,16 @@
 					this.paceMinutes = minutes;
 
 					let timeString = String(time);
-					console.log(timeString);
 
 					if (timeString.indexOf('.') != -1) {
 						let seconds = timeString.substr(timeString.indexOf('.'), timeString.length);
 						seconds	= (seconds * 0.6) * 100;
 						seconds	= Math.round(seconds * 10) / 10;
-						console.log("Seconds " + seconds);
 						this.paceSeconds = seconds;
 					}
 					else {
 						this.paceSeconds = 0;
 					}
-					
-
-					
-					
 				}
 			},
 			calculateSpeed: function() {
@@ -250,12 +228,11 @@
 					let speed = (this.distanceKilometers + (this.distanceMeters / 1000)) / time;
 					speed = Math.round(speed * 10) / 10;
 					this.speed = speed;
-				}
-				
+				}	
 			}
 		}
-	})
+	});
 </script>
-
+</div>
 </body>
 </html>
